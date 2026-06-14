@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { FaArrowUp, FaMoon, FaSun } from 'react-icons/fa';
+import { FaArrowUp } from 'react-icons/fa';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
@@ -15,6 +15,8 @@ export default function App() {
   const [loading, setLoading] = useState(true);
   const [showTop, setShowTop] = useState(false);
   const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 });
+  const [scrollProgress, setScrollProgress] = useState(0);
+  const videoRef = useRef(null);
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
@@ -23,13 +25,45 @@ export default function App() {
 
   useEffect(() => {
     const timer = setTimeout(() => setLoading(false), 900);
-    const onScroll = () => setShowTop(window.scrollY > 420);
+
+    const startVideo = async () => {
+      const video = videoRef.current;
+      if (!video) return;
+
+      try {
+        video.muted = true;
+        video.playsInline = true;
+        video.setAttribute('playsinline', '');
+        await video.play();
+      } catch (error) {
+        console.warn('Autoplay was blocked, waiting for user interaction.', error);
+
+        const onFirstInteraction = () => {
+          video.play().catch(() => {});
+          document.removeEventListener('pointerdown', onFirstInteraction);
+          document.removeEventListener('touchstart', onFirstInteraction);
+          document.removeEventListener('keydown', onFirstInteraction);
+        };
+
+        document.addEventListener('pointerdown', onFirstInteraction, { passive: true });
+        document.addEventListener('touchstart', onFirstInteraction, { passive: true });
+        document.addEventListener('keydown', onFirstInteraction);
+      }
+    };
+
+    const onScroll = () => {
+      const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = totalHeight > 0 ? window.scrollY / totalHeight : 0;
+      setShowTop(window.scrollY > 420);
+      setScrollProgress(Math.min(1, Math.max(0, progress)));
+    };
     const onMove = (event) => setCursorPos({ x: event.clientX, y: event.clientY });
 
-    window.addEventListener('scroll', onScroll);
+    window.addEventListener('scroll', onScroll, { passive: true });
     window.addEventListener('mousemove', onMove);
 
     onScroll();
+    void startVideo();
 
     return () => {
       clearTimeout(timer);
@@ -66,6 +100,33 @@ export default function App() {
           </motion.div>
         )}
       </AnimatePresence>
+
+      <div className="scroll-progress-bar" style={{ transform: `scaleX(${scrollProgress})` }} aria-hidden="true" />
+
+      <div className="video-bg-layer" aria-hidden="true">
+        <video
+          ref={videoRef}
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="auto"
+          onLoadedData={() => videoRef.current?.play().catch(() => {})}
+        >
+          <source src="/portfolio/vedio.mp4" type="video/mp4" />
+        </video>
+        <div className="video-bg-fallback" />
+        <div className="cinematic-ambient-layer">
+          <span className="cinematic-ring ring-one" />
+          <span className="cinematic-ring ring-two" />
+          <span className="cinematic-line line-one" />
+          <span className="cinematic-line line-two" />
+          <span className="cinematic-particle particle-one" />
+          <span className="cinematic-particle particle-two" />
+          <span className="cinematic-particle particle-three" />
+          <span className="cinematic-particle particle-four" />
+        </div>
+      </div>
 
       <motion.div
         className="cursor-glow"

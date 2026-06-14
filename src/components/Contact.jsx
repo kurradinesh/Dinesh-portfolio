@@ -1,8 +1,19 @@
-import React from 'react';
+import { useState } from 'react';
 import useScrollAnimation from './useScrollAnimation';
 
 export default function Contact() {
   const animatedRef = useScrollAnimation();
+  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const subject = encodeURIComponent(`Portfolio inquiry from ${formData.name || 'a visitor'}`);
+    const body = encodeURIComponent(
+      `Name: ${formData.name}\nEmail: ${formData.email}\n\n${formData.message}`,
+    );
+
+    window.location.href = `mailto:kurradinesh93@gmail.com?subject=${subject}&body=${body}`;
+  };
 
   return (
     <section id="contact" className="section-padding">
@@ -22,8 +33,8 @@ export default function Contact() {
               {[
                 { label: 'Email', val: 'kurradinesh93@gmail.com', icon: 'fas fa-envelope-open', href: 'mailto:kurradinesh93@gmail.com' },
                 { label: 'Phone', val: '+91 7981619694', icon: 'fas fa-phone-volume', href: 'tel:+917981619694' },
-                { label: 'Location', val: 'Andhra Pradesh, India', icon: 'fas fa-earth-americas' },
-                { label: 'GitHub', val: 'GitHub Profile', icon: 'fab fa-github', href: 'https://github.com/' },
+                { label: 'Location', val: 'Andhra Pradesh, India', icon: 'fas fa-earth-americas', href: 'https://www.google.com/maps/search/Andhra+Pradesh,+India' },
+                { label: 'GitHub', val: 'GitHub Profile', icon: 'fab fa-github', href: 'https://github.com/kurradinesh' },
               ].map((c) => (
                 <a key={c.label} href={c.href || '#'} className="contact-card" target={c.href && c.href.startsWith('http') ? '_blank' : undefined} rel={c.href && c.href.startsWith('http') ? 'noreferrer' : undefined}>
                   <div className="contact-icon"><i className={c.icon}></i></div>
@@ -43,19 +54,19 @@ export default function Contact() {
           </div>
 
           <div className="col-lg-7">
-            <form className="glass-container p-4" onSubmit={(e) => e.preventDefault()}>
+            <form className="glass-container p-4" onSubmit={handleSubmit}>
               <div className="row g-3">
                 <div className="col-md-6">
                   <label className="small fw-semibold text-custom-muted mb-1">Your Name</label>
-                  <input type="text" className="form-control input-premium" placeholder="Kurra Dinesh" required />
+                  <input type="text" name="name" value={formData.name} onChange={(e) => setFormData((prev) => ({ ...prev, name: e.target.value }))} className="form-control input-premium" placeholder="Kurra Dinesh" required />
                 </div>
                 <div className="col-md-6">
                   <label className="small fw-semibold text-custom-muted mb-1">Email Address</label>
-                  <input type="email" className="form-control input-premium" placeholder="kurradinesh93@gmail.com" required />
+                  <input type="email" name="email" value={formData.email} onChange={(e) => setFormData((prev) => ({ ...prev, email: e.target.value }))} className="form-control input-premium" placeholder="kurradinesh93@gmail.com" required />
                 </div>
                 <div className="col-12">
                   <label className="small fw-semibold text-custom-muted mb-1">Message Body</label>
-                  <textarea className="form-control input-premium" rows="5" placeholder="Tell me about your project idea or opportunity..." required></textarea>
+                  <textarea name="message" value={formData.message} onChange={(e) => setFormData((prev) => ({ ...prev, message: e.target.value }))} className="form-control input-premium" rows="5" placeholder="Tell me about your project idea or opportunity..." required></textarea>
                 </div>
                 <div className="col-12 mt-4 d-flex flex-wrap gap-3 align-items-center justify-content-between">
                   <p className="text-custom-muted small mb-0">I usually reply within 24 hours.</p>

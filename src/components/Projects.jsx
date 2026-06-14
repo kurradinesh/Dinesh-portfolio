@@ -1,4 +1,3 @@
-import React from 'react';
 import { motion } from 'framer-motion';
 import useScrollAnimation from './useScrollAnimation';
 
@@ -8,14 +7,17 @@ const stackProjects = [
     desc: 'Designed and developed a Shopify e-commerce store for beauty products, including customized product pages, collections, and navigation with responsive design for desktop and mobile devices.',
     stack: ['Shopify', 'E-Commerce', 'Responsive Design'],
     img: 'https://images.unsplash.com/photo-1556228720-195a672e8a03?q=80&w=600',
-    liveUrl: 'https://glowbeauty-hub.myshopify.com/',
+    liveUrl: 'https://glowbeauty-hub.myshopify.com',
+    repoUrl: 'https://github.com/kurradinesh',
+    passwordProtected: true,
   },
   {
     title: 'Online Book Store Website',
     desc: 'Developed a responsive bookstore using HTML, CSS, and JavaScript with structured book listings and a modern UI design.',
     stack: ['HTML', 'CSS', 'JavaScript'],
     img: 'https://images.unsplash.com/photo-1512820790803-83ca734da794?q=80&w=600',
-    liveUrl: '#',
+    liveUrl: 'https://github.com/kurradinesh',
+    repoUrl: 'https://github.com/kurradinesh',
   },
   {
     title: 'Career Guidance Website',
@@ -23,11 +25,23 @@ const stackProjects = [
     stack: ['React.js', 'Bootstrap', 'Web Design'],
     img: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=600',
     liveUrl: 'https://kurradinesh.github.io/successful-career-guidance/',
+    repoUrl: 'https://github.com/kurradinesh',
   },
 ];
 
 export default function Projects() {
   const animatedRef = useScrollAnimation();
+
+  const handleLiveClick = (event, project) => {
+    if (project.passwordProtected) {
+      event.preventDefault();
+      window.open(project.liveUrl, '_blank', 'noopener,noreferrer');
+      window.alert('This Shopify store is password protected. Password: Bujjibabu@7732');
+      return;
+    }
+
+    return true;
+  };
 
   return (
     <section id="projects" className="section-padding">
@@ -64,12 +78,13 @@ export default function Projects() {
                   </div>
                 </div>
                 <div className="p-4 pt-0 d-flex justify-content-between align-items-center gap-2">
-                  <a href="#" className="btn-mini"><i className="fab fa-github me-1"></i> Repo</a>
+                  <a href={proj.repoUrl} target="_blank" rel="noreferrer" className="btn-mini"><i className="fab fa-github me-1"></i> Repo</a>
                   <a
                     href={proj.liveUrl}
                     target="_blank"
                     rel="noreferrer"
                     className="btn-mini btn-mini-accent"
+                    onClick={(event) => handleLiveClick(event, proj)}
                   >
                     <i className="fas fa-arrow-up-right-from-square me-1"></i> Live
                   </a>
