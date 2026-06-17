@@ -50,8 +50,8 @@ export default function Hero() {
               <a href="#projects" className="btn-gradient">View Projects <i className="fas fa-arrow-right small"></i></a>
               <a href="#contact" className="btn-glass-outline">Contact Me</a>
               <a
-                href="/portfolio/dinesh-resume.pdf"
-                download="Dinesh Resume ( R E ).pdf"
+                href={encodeURI(`${import.meta.env.BASE_URL}Kurra Dinesh Resume.pdf`)}
+                download="Kurra Dinesh Resume.pdf"
                 className="btn-glass-outline"
                 aria-label="Download resume PDF"
               >
@@ -73,7 +73,7 @@ export default function Hero() {
           >
             <div className="profile-shell position-relative d-inline-block fade-in-right">
               <div className="profile-ring" />
-             <img src="/portfolio/Dinesh.jpeg" alt="Kurra Dinesh Profile" className="img-fluid rounded-circle hero-profile-avatar" />
+             <img src={import.meta.env.BASE_URL + 'Dinesh.jpeg'} alt="Kurra Dinesh Profile" className="img-fluid rounded-circle hero-profile-avatar" />
               {floatingTech.map((item, index) => (
                 <motion.span
                   key={item.label}

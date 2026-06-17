@@ -113,7 +113,7 @@ export default function App() {
           preload="auto"
           onLoadedData={() => videoRef.current?.play().catch(() => {})}
         >
-          <source src="/portfolio/vedio.mp4" type="video/mp4" />
+          <source src={import.meta.env.BASE_URL + 'vedio.mp4'} type="video/mp4" />
         </video>
         <div className="video-bg-fallback" />
         <div className="cinematic-ambient-layer">
@@ -135,9 +135,9 @@ export default function App() {
       />
 
       <div className="ambient-bg" aria-hidden="true">
-        <span className="blob blob-one" />
-        <span className="blob blob-two" />
-        <span className="blob blob-three" />
+        <span className="blob blob-one" style={{ transform: `translateY(${scrollProgress * -18}px)` }} />
+        <span className="blob blob-two" style={{ transform: `translateY(${scrollProgress * -10}px)` }} />
+        <span className="blob blob-three" style={{ transform: `translateY(${scrollProgress * -24}px)` }} />
       </div>
 
       <Navbar theme={theme} toggleTheme={toggleTheme} />
