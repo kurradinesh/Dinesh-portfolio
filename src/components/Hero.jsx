@@ -73,7 +73,7 @@ export default function Hero() {
           >
             <div className="profile-shell position-relative d-inline-block fade-in-right">
               <div className="profile-ring" />
-             <img src="/Dinesh-portfolio/src/assets/Dinesh.jpeg" alt="Kurra Dinesh Profile" className="img-fluid rounded-circle hero-profile-avatar" />
+             <img src={`${import.meta.env.BASE_URL}Dinesh.jpeg`} alt="Kurra Dinesh Profile" className="img-fluid rounded-circle hero-profile-avatar" />
               {floatingTech.map((item, index) => (
                 <motion.span
                   key={item.label}
