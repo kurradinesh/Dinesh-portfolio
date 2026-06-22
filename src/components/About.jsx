@@ -31,7 +31,7 @@ export default function About() {
                 <div className="col-lg-7">
                   <div className="d-flex align-items-center gap-3 mb-3">
                     <img
-                      src={import.meta.env.BASE_URL + 'Dinesh.jpeg'}
+                      src="/Dinesh-portfolio/src/assets/Dinesh.jpeg"
                       alt="Dinesh profile"
                       className="rounded-circle border border-light border-2 shadow"
                       style={{ width: '72px', height: '72px', objectFit: 'cover' }}
