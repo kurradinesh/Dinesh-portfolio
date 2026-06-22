@@ -27,11 +27,11 @@ export default function Navbar({ theme, toggleTheme }) {
           <FaBars />
         </button>
         <div className="collapse navbar-collapse" id="portfolioNav">
-          <ul className="navbar-nav ms-auto align-items-center gap-2">
-            {['home', 'about', 'skills', 'projects', 'resume', 'contact'].map((section) => (
+          <ul className="navbar-nav ms-auto align-items-center gap-2 py-3 py-lg-0">
+            {['home', 'about', 'skills', 'projects', 'resume', 'certifications', 'contact'].map((section) => (
               <li className="nav-item" key={section}>
                 <a
-                  className="nav-link text-capitalize px-3 fw-medium text-custom-muted"
+                  className="nav-link text-capitalize px-3 py-2 fw-medium text-custom-muted rounded-3"
                   href={`#${section}`}
                   data-bs-dismiss="collapse"
                 >
@@ -39,7 +39,7 @@ export default function Navbar({ theme, toggleTheme }) {
                 </a>
               </li>
             ))}
-            <li className="nav-item ms-lg-3">
+            <li className="nav-item ms-lg-3 mt-2 mt-lg-0">
               <button
                 type="button"
                 onClick={toggleTheme}

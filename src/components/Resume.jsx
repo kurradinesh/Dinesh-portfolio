@@ -89,6 +89,17 @@ export default function Resume() {
             </article>
           </div>
         </div>
+        <div className="row mt-4">
+          <div className="col-12 text-center">
+            <a
+              href={encodeURI(`${import.meta.env.BASE_URL}Kurra Dinesh Resume.pdf`)}
+              download="Kurra Dinesh Resume.pdf"
+              className="btn-gradient"
+            >
+              Download Full Resume
+            </a>
+          </div>
+        </div>
       </div>
     </section>
   );
