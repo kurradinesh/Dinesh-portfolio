@@ -16,7 +16,6 @@ export default function App() {
   const [showTop, setShowTop] = useState(false);
   const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 });
   const [scrollProgress, setScrollProgress] = useState(0);
-  const videoRef = useRef(null);
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
@@ -25,31 +24,6 @@ export default function App() {
 
   useEffect(() => {
     const timer = setTimeout(() => setLoading(false), 900);
-
-    const startVideo = async () => {
-      const video = videoRef.current;
-      if (!video) return;
-
-      try {
-        video.muted = true;
-        video.playsInline = true;
-        video.setAttribute('playsinline', '');
-        await video.play();
-      } catch (error) {
-        console.warn('Autoplay was blocked, waiting for user interaction.', error);
-
-        const onFirstInteraction = () => {
-          video.play().catch(() => {});
-          document.removeEventListener('pointerdown', onFirstInteraction);
-          document.removeEventListener('touchstart', onFirstInteraction);
-          document.removeEventListener('keydown', onFirstInteraction);
-        };
-
-        document.addEventListener('pointerdown', onFirstInteraction, { passive: true });
-        document.addEventListener('touchstart', onFirstInteraction, { passive: true });
-        document.addEventListener('keydown', onFirstInteraction);
-      }
-    };
 
     const onScroll = () => {
       const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
@@ -63,7 +37,6 @@ export default function App() {
     window.addEventListener('mousemove', onMove);
 
     onScroll();
-    void startVideo();
 
     return () => {
       clearTimeout(timer);
@@ -104,17 +77,6 @@ export default function App() {
       <div className="scroll-progress-bar" style={{ transform: `scaleX(${scrollProgress})` }} aria-hidden="true" />
 
       <div className="video-bg-layer" aria-hidden="true">
-        <video
-          ref={videoRef}
-          autoPlay
-          loop
-          muted
-          playsInline
-          preload="auto"
-          onLoadedData={() => videoRef.current?.play().catch(() => {})}
-        >
-          <source src={import.meta.env.BASE_URL + 'vedio.mp4'} type="video/mp4" />
-        </video>
         <div className="video-bg-fallback" />
         <div className="cinematic-ambient-layer">
           <span className="cinematic-ring ring-one" />

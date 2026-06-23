@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import useScrollAnimation from './useScrollAnimation';
+import DineshImage from '../assets/Dinesh.jpeg';
 
 const metrics = [
   { value: '8.9/10', label: 'Academic CGPA' },
