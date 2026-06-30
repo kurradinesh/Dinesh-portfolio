@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { FaDownload, FaEnvelope, FaGithub, FaLinkedin, FaReact, FaJava, FaDatabase } from 'react-icons/fa';
 import { SiJavascript, SiMysql, SiBootstrap } from 'react-icons/si';
-
+import DineshImage from '../assets/Dinesh.jpeg';
 const floatingTech = [
   { icon: <FaJava />, label: 'Java' },
   { icon: <FaReact />, label: 'React' },
@@ -73,7 +73,11 @@ export default function Hero() {
           >
             <div className="profile-shell position-relative d-inline-block fade-in-right">
               <div className="profile-ring" />
-             <img src={`${import.meta.env.BASE_URL}Dinesh.jpeg`} alt="Kurra Dinesh Profile" className="img-fluid rounded-circle hero-profile-avatar" />
+             <img
+                src={DineshImage}
+                alt="Kurra Dinesh Profile"
+                 className="img-fluid rounded-circle hero-profile-avatar"
+              />
               {floatingTech.map((item, index) => (
                 <motion.span
                   key={item.label}

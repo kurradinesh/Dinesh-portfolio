@@ -510,63 +510,11 @@ main, .navbar, footer { position: relative; z-index: 1; }
 }
 
 .hero-profile-avatar {
-  width: min(340px, 100%);
-  height: auto;
+  width: 340px;
+  height: 340px;
   object-fit: cover;
   border: 6px solid var(--bg-main);
   box-shadow: 0 0 40px rgba(99, 102, 241, 0.25);
-}
-
-section {
-  scroll-margin-top: 110px;
-}
-
-.hero-profile-avatar {
-  max-width: 100%;
-}
-
-.floating-chip {
-  z-index: 2;
-  min-width: 90px;
-  justify-content: center;
-  padding: 10px 12px;
-  font-size: 0.82rem;
-}
-
-@media (max-width: 991.98px) {
-  .section-padding { padding: 80px 0; }
-  .hero-title { font-size: 2.6rem; }
-  .profile-shell {
-    max-width: 380px;
-    margin: 0 auto;
-  }
-}
-
-@media (max-width: 767.98px) {
-  .section-padding { padding: 70px 0; }
-  .hero-title { font-size: 2.2rem; }
-  .btn-gradient,
-  .btn-glass-outline {
-    width: 100%;
-  }
-  .hero-profile-avatar {
-    max-width: 280px;
-  }
-  .floating-chip {
-    display: none;
-  }
-  .navbar-collapse {
-    background: var(--bg-alt);
-    border-radius: 18px;
-    padding: 18px;
-  }
-  .project-overlay {
-    position: static;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-top: 12px;
-  }
 }
 
 /* --- PREMIUM UX ENHANCEMENTS --- */
@@ -729,29 +677,10 @@ section {
   .hero-title { font-size: 2.8rem; }
   .navbar-collapse {
     background: var(--bg-alt);
-    padding: 18px 20px;
-    border-radius: 18px;
-    margin-top: 12px;
+    padding: 24px;
+    border-radius: 16px;
+    margin-top: 15px;
     border: 1px solid var(--glass-border);
-    box-shadow: 0 22px 40px rgba(0, 0, 0, 0.12);
-  }
-  .navbar-nav {
-    gap: 0;
-  }
-  .navbar-nav .nav-item {
-    width: 100%;
-  }
-  .navbar-nav .nav-link {
-    width: 100%;
-    padding-left: 1rem;
-    padding-right: 1rem;
-    margin-bottom: 0.35rem;
-    color: var(--text-muted);
-  }
-  .navbar-nav .nav-link:hover,
-  .navbar-nav .nav-link:focus {
-    background: rgba(99, 102, 241, 0.12);
-    color: var(--text-main);
   }
 }
 
@@ -759,17 +688,5 @@ section {
   .video-bg-layer video {
     transform: scale(1.08);
     filter: saturate(1.02) contrast(1.03) brightness(0.62);
-  }
-}
-
-@media (max-width: 991.98px) {
-  .section-padding { padding: 80px 0; }
-  .hero-title { font-size: 2.8rem; }
-}
-
-@media (max-width: 575.98px) {
-  .section-padding { padding: 70px 0; }
-  .hero-profile-avatar {
-    border-width: 4px;
   }
 }
